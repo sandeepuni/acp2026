@@ -1,0 +1,45 @@
+(lldb) target create "./demo1"
+Current executable set to '/Users/sandeepunni/acp2026/level1/demo1' (arm64).
+(lldb) command source -s 0 '/tmp/lldb_commands.txt'
+Executing commands in '/tmp/lldb_commands.txt'.
+(lldb) breakpoint set --name main
+Breakpoint 1: where = demo1`main + 40 at demo1.c:8:4, address = 0x0000000100000488
+(lldb) run
+Process 37462 launched: '/Users/sandeepunni/acp2026/level1/demo1' (arm64)
+Process 37462 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = breakpoint 1.1
+    frame #0: 0x0000000100000488 demo1`main at demo1.c:8:4
+   5   	int main()
+   6   	{
+   7   	   int n, max;
+-> 8   	   printf("Enter the number of elements: ");
+    	   ^
+   9   	   scanf("%d", &n);
+   10  	   float arr[n];
+   11  	   input(n, arr);
+Target 0: (demo1) stopped.
+(lldb) list
+   12  	   max = find_max_index(n, arr);
+   13  	   output(arr, max);
+   14  	   return 0;
+   15  	}
+   16  	void input(int n, float arr[n])
+   17  	{
+   18  	   for (int i = 0; i < n; i++)
+(lldb) next
+Process 37462 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x0000000100000494 demo1`main at demo1.c:9:4
+   6   	{
+   7   	   int n, max;
+   8   	   printf("Enter the number of elements: ");
+-> 9   	   scanf("%d", &n);
+    	   ^
+   10  	   float arr[n];
+   11  	   input(n, arr);
+   12  	   max = find_max_index(n, arr);
+Target 0: (demo1) stopped.
+(lldb) print n
+(int) -92116536
+(lldb) continue
+Enter the number of elements: 
