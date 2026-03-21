@@ -1,0 +1,161 @@
+(lldb) target create "demo2"
+Current executable set to '/Users/sandeepunni/acp2026/level1/demo2' (arm64).
+(lldb) command source -s 0 'debug_commands.lldb'
+Executing commands in '/Users/sandeepunni/acp2026/level1/debug_commands.lldb'.
+(lldb) breakpoint set --file demo2.c --line 15
+Breakpoint 1: where = demo2`main + 36 at demo2.c:15:10, address = 0x0000000100000484
+(lldb) breakpoint set --file demo2.c --line 16
+Breakpoint 2: where = demo2`main + 104 at demo2.c:16:15, address = 0x00000001000004c8
+(lldb) breakpoint set --file demo2.c --line 17
+Breakpoint 3: where = demo2`main + 124 at demo2.c:17:10, address = 0x00000001000004dc
+(lldb) breakpoint set --file demo2.c --line 21
+Breakpoint 4: where = demo2`main + 296 at demo2.c:21:5, address = 0x0000000100000588
+(lldb) settings set target.input-path input.txt
+(lldb) run
+Process 14924 launched: '/Users/sandeepunni/acp2026/level1/demo2' (arm64)
+Process 14924 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = breakpoint 1.1
+    frame #0: 0x0000000100000484 demo2`main at demo2.c:15:10
+   12  	int main()
+   13  	{
+   14  	    Rectangle r1, r2, r3;
+-> 15  	    r1 = input(r1);
+    	         ^
+   16  	    r1.area = calculate_area(r1);
+   17  	    r2 = input(r2);
+   18  	    r2.area = calculate_area(r2);
+Target 0: (demo2) stopped.
+(lldb) next
+Enter the rectangle name 
+Enter the Length 
+Enter the Width 
+Process 14924 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = breakpoint 2.1
+    frame #0: 0x00000001000004c8 demo2`main at demo2.c:16:15
+   13  	{
+   14  	    Rectangle r1, r2, r3;
+   15  	    r1 = input(r1);
+-> 16  	    r1.area = calculate_area(r1);
+    	              ^
+   17  	    r2 = input(r2);
+   18  	    r2.area = calculate_area(r2);
+   19  	    r3 = input(r3);
+Target 0: (demo2) stopped.
+(lldb) print r1.name
+(char[50]) "RectA\0\0\0\0\xea\U00000001\0\0\0\0\0\U00000002\0\0\0\0\0\0\0 \x80\xcc\xfe\U00000001\0\0\0\x90\x96\xcc\xfe\U00000001\0\0\0\x90\xea\xdfo\U00000001\0\0\0\xe8u"
+(lldb) print r1.length
+(float) 10
+(lldb) print r1.width
+(float) 5
+(lldb) next
+Process 14924 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = breakpoint 3.1
+    frame #0: 0x00000001000004dc demo2`main at demo2.c:17:10
+   14  	    Rectangle r1, r2, r3;
+   15  	    r1 = input(r1);
+   16  	    r1.area = calculate_area(r1);
+-> 17  	    r2 = input(r2);
+    	         ^
+   18  	    r2.area = calculate_area(r2);
+   19  	    r3 = input(r3);
+   20  	    r3.area = calculate_area(r3);
+Target 0: (demo2) stopped.
+(lldb) print r1.area
+(float) 50
+(lldb) next
+Enter the rectangle name 
+Enter the Length 
+Enter the Width 
+Process 14924 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x0000000100000518 demo2`main at demo2.c:18:15
+   15  	    r1 = input(r1);
+   16  	    r1.area = calculate_area(r1);
+   17  	    r2 = input(r2);
+-> 18  	    r2.area = calculate_area(r2);
+    	              ^
+   19  	    r3 = input(r3);
+   20  	    r3.area = calculate_area(r3);
+   21  	    compare_areas(r1, r2, r3);
+Target 0: (demo2) stopped.
+(lldb) print r2.name
+(char[50]) "RectB"
+(lldb) print r2.length
+(float) 4
+(lldb) print r2.width
+(float) 3
+(lldb) next
+Process 14924 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x000000010000052c demo2`main at demo2.c:19:10
+   16  	    r1.area = calculate_area(r1);
+   17  	    r2 = input(r2);
+   18  	    r2.area = calculate_area(r2);
+-> 19  	    r3 = input(r3);
+    	         ^
+   20  	    r3.area = calculate_area(r3);
+   21  	    compare_areas(r1, r2, r3);
+   22  	
+Target 0: (demo2) stopped.
+(lldb) print r2.area
+(float) 12
+(lldb) next
+Enter the rectangle name 
+Enter the Length 
+Enter the Width 
+Process 14924 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x0000000100000568 demo2`main at demo2.c:20:15
+   17  	    r2 = input(r2);
+   18  	    r2.area = calculate_area(r2);
+   19  	    r3 = input(r3);
+-> 20  	    r3.area = calculate_area(r3);
+    	              ^
+   21  	    compare_areas(r1, r2, r3);
+   22  	
+   23  	    return 0;
+Target 0: (demo2) stopped.
+(lldb) print r3.name
+(char[50]) "RectC\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\x80\xe8\xdfo\U00000001\0\0\0\xd2\xe8\xdfo\U00000001\0\0\0\xc0\xe7\xdfo\U00000001"
+(lldb) print r3.length
+(float) 2
+(lldb) print r3.width
+(float) 2
+(lldb) next
+Process 14924 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = breakpoint 4.1
+    frame #0: 0x0000000100000588 demo2`main at demo2.c:21:5
+   18  	    r2.area = calculate_area(r2);
+   19  	    r3 = input(r3);
+   20  	    r3.area = calculate_area(r3);
+-> 21  	    compare_areas(r1, r2, r3);
+    	    ^
+   22  	
+   23  	    return 0;
+   24  	}
+Target 0: (demo2) stopped.
+(lldb) print r3.area
+(float) 4
+(lldb) next
+Process 14924 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x00000001000005c4 demo2`main at demo2.c:23:5
+   20  	    r3.area = calculate_area(r3);
+   21  	    compare_areas(r1, r2, r3);
+   22  	
+-> 23  	    return 0;
+    	    ^
+   24  	}
+   25  	Rectangle input()
+   26  	{
+Target 0: (demo2) stopped.
+(lldb) print r1.area
+(float) 50
+(lldb) print r2.area
+(float) 12
+(lldb) print r3.area
+(float) 4
+(lldb) continue
+Largest Rectangle : RectA with Area : 50.00Process 14924 resuming
+Process 14924 exited with status = 0 (0x00000000)
+(lldb) quit
