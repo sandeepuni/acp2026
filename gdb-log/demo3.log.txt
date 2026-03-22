@@ -1,0 +1,119 @@
+(lldb) target create "demo3"
+Current executable set to '/Users/sandeepunni/acp2026/level1/demo3' (arm64).
+(lldb) command source -s 0 'debug_commands.lldb'
+Executing commands in '/Users/sandeepunni/acp2026/level1/debug_commands.lldb'.
+(lldb) breakpoint set --file demo3.c --line 18
+Breakpoint 1: where = demo3`main + 152 at demo3.c:18:11, address = 0x00000001000004f8
+(lldb) breakpoint set --file demo3.c --line 19
+Breakpoint 2: where = demo3`main + 164 at demo3.c:19:20, address = 0x0000000100000504
+(lldb) breakpoint set --file demo3.c --line 20
+Breakpoint 3: where = demo3`main + 176 at demo3.c:20:27, address = 0x0000000100000510
+(lldb) breakpoint set --file demo3.c --line 21
+Breakpoint 4: where = demo3`main + 192 at demo3.c:21:12, address = 0x0000000100000520
+(lldb) settings set target.input-path /Users/sandeepunni/acp2026/level1/input.txt
+(lldb) run
+Process 27735 launched: '/Users/sandeepunni/acp2026/level1/demo3' (arm64)
+Process 27735 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = breakpoint 1.1
+    frame #0: 0x00000001000004f8 demo3`main at demo3.c:18:11
+   15  	    printf("Enter the number of rectangles : ");
+   16  	    scanf("%d", &n);
+   17  	    Rectangle r[n];
+-> 18  	    input(n, r);
+    	          ^
+   19  	    calculate_area(n, r);
+   20  	    max = findLargestArea(n, r);
+   21  	    output(max, r, n);
+Target 0: (demo3) stopped.
+(lldb) next
+Process 27735 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = breakpoint 2.1
+    frame #0: 0x0000000100000504 demo3`main at demo3.c:19:20
+   16  	    scanf("%d", &n);
+   17  	    Rectangle r[n];
+   18  	    input(n, r);
+-> 19  	    calculate_area(n, r);
+    	                   ^
+   20  	    max = findLargestArea(n, r);
+   21  	    output(max, r, n);
+   22  	
+Target 0: (demo3) stopped.
+(lldb) print r[0].length
+(float) 10
+(lldb) print r[0].width
+(float) 5
+(lldb) next
+Process 27735 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = breakpoint 3.1
+    frame #0: 0x0000000100000510 demo3`main at demo3.c:20:27
+   17  	    Rectangle r[n];
+   18  	    input(n, r);
+   19  	    calculate_area(n, r);
+-> 20  	    max = findLargestArea(n, r);
+    	                          ^
+   21  	    output(max, r, n);
+   22  	
+   23  	    return 0;
+Target 0: (demo3) stopped.
+(lldb) print r[0].area
+(float) 50
+(lldb) next
+Process 27735 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = breakpoint 4.1
+    frame #0: 0x0000000100000520 demo3`main at demo3.c:21:12
+   18  	    input(n, r);
+   19  	    calculate_area(n, r);
+   20  	    max = findLargestArea(n, r);
+-> 21  	    output(max, r, n);
+    	           ^
+   22  	
+   23  	    return 0;
+   24  	}
+Target 0: (demo3) stopped.
+(lldb) print r[1].length
+(float) 4
+(lldb) print r[1].width
+(float) 3
+(lldb) next
+Enter the number of rectangles : Enter the length of Rectangle 1 : Enter the width of Rectangle 1 : Enter the length of Rectangle 2 : Enter the width of Rectangle 2 : Enter the length of Rectangle 3 : Enter the width of Rectangle 3 : The largest area  : 50.00
+The length of the largest area : 10.000000 
+The width of the largest area : 5.000000
+Process 27735 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x0000000100000530 demo3`main at demo3.c:23:5
+   20  	    max = findLargestArea(n, r);
+   21  	    output(max, r, n);
+   22  	
+-> 23  	    return 0;
+    	    ^
+   24  	}
+   25  	void input(int n, Rectangle rects[n])
+   26  	{
+Target 0: (demo3) stopped.
+(lldb) print r[1].area
+(float) 12
+(lldb) next
+Process 27735 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x0000000100000534 demo3`main at demo3.c:24:1
+   21  	    output(max, r, n);
+   22  	
+   23  	    return 0;
+-> 24  	}
+    	^
+   25  	void input(int n, Rectangle rects[n])
+   26  	{
+   27  	    int i = 0;
+Target 0: (demo3) stopped.
+(lldb) print r[2].length
+(float) 2
+(lldb) print r[2].width
+(float) 2
+(lldb) print r[2].area
+(float) 4
+(lldb) print max
+(int) 0
+(lldb) continue
+The Max Index : 0Process 27735 resuming
+Process 27735 exited with status = 0 (0x00000000)
+(lldb) quit
