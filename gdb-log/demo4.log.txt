@@ -1,0 +1,90 @@
+(lldb) target create "demo4"
+Current executable set to '/Users/sandeepunni/acp2026/level1/demo4' (arm64).
+(lldb) command source -s 0 'debug_commands.lldb'
+Executing commands in '/Users/sandeepunni/acp2026/level1/debug_commands.lldb'.
+(lldb) breakpoint set --file demo4.c --line 19
+Breakpoint 1: where = demo4`main + 88 at demo4.c:19:5, address = 0x00000001000004b8
+(lldb) breakpoint set --file demo4.c --line 21
+Breakpoint 2: where = demo4`main + 112 at demo4.c:21:43, address = 0x00000001000004d0
+(lldb) breakpoint set --file demo4.c --line 22
+Breakpoint 3: where = demo4`main + 148 at demo4.c:22:25, address = 0x00000001000004f4
+(lldb) settings set target.input-path /Users/sandeepunni/acp2026/level1/input.txt
+(lldb) run
+Process 41948 launched: '/Users/sandeepunni/acp2026/level1/demo4' (arm64)
+Process 41948 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = breakpoint 1.1
+    frame #0: 0x00000001000004b8 demo4`main at demo4.c:19:5
+   16  	    printf("Enter the number of flights : ");
+   17  	    scanf("%d", &n);
+   18  	    readFlights(n, f);
+-> 19  	    printf("Enter the Destination : ");
+    	    ^
+   20  	    scanf(" ");
+   21  	    fgets(searchDest, sizeof(searchDest), stdin);
+   22  	    searchByDestination(n, f, searchDest);
+Target 0: (demo4) stopped.
+(lldb) next
+Process 41948 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x00000001000004c4 demo4`main at demo4.c:20:5
+   17  	    scanf("%d", &n);
+   18  	    readFlights(n, f);
+   19  	    printf("Enter the Destination : ");
+-> 20  	    scanf(" ");
+    	    ^
+   21  	    fgets(searchDest, sizeof(searchDest), stdin);
+   22  	    searchByDestination(n, f, searchDest);
+   23  	
+Target 0: (demo4) stopped.
+(lldb) print f[0].fno
+(int) 23
+(lldb) print f[0].dest
+(char[50]) "Abu Dhabi\n\0\0\x90\x96\xcc\xfe\U00000001\0\0\0\x90\xea\xdfo\U00000001\0\0\0\xe8u#\x92\U00000001\0\0\0\xc8)\xf7\xfe\U00000001\0\0\0("
+(lldb) print f[0].avs
+(int) 234
+(lldb) print f[1].fno
+(int) 344
+(lldb) print f[1].dest
+(char[50]) "Dubai\n\0\0\0\0\0B\0\0\0\0\fj#\x92\U00000001\0\0\0\xb0\xd9\\\0\U00000002\0\0\0\xc8\xea\xdfo\U00000001\0\0\0\xc8)\xf7\xfe\U00000001\0\0\0\U00000001"
+(lldb) print f[1].avs
+(int) 23
+(lldb) print f[2].fno
+(int) 345
+(lldb) print f[2].dest
+(char[50]) "Delhi\n\0\x92\U00000001\0\0\0\0\xeb\xdfo\U00000001\0\0\0\xe0\xeb\xc3\xff\U00000001\0\0\0\0\0\0@\0\0\0\0\x90h#\x92\U00000001\0\0\0\x90\xd9\\\0\U00000002"
+(lldb) print f[2].avs
+(int) 23
+(lldb) next
+Process 41948 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = breakpoint 2.1
+    frame #0: 0x00000001000004d0 demo4`main at demo4.c:21:43
+   18  	    readFlights(n, f);
+   19  	    printf("Enter the Destination : ");
+   20  	    scanf(" ");
+-> 21  	    fgets(searchDest, sizeof(searchDest), stdin);
+    	                                          ^
+   22  	    searchByDestination(n, f, searchDest);
+   23  	
+   24  	    return 0;
+Target 0: (demo4) stopped.
+(lldb) print searchDest
+(char[50]) "\0\0\xe0`\xf7\xfe\U00000001\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0x\xeb\xdfo\U00000001\0\0\0\0\0\0\0\0\0\0\0\0\xea\U00000001"
+(lldb) next
+Process 41948 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = breakpoint 3.1
+    frame #0: 0x00000001000004f4 demo4`main at demo4.c:22:25
+   19  	    printf("Enter the Destination : ");
+   20  	    scanf(" ");
+   21  	    fgets(searchDest, sizeof(searchDest), stdin);
+-> 22  	    searchByDestination(n, f, searchDest);
+    	                        ^
+   23  	
+   24  	    return 0;
+   25  	}
+Target 0: (demo4) stopped.
+(lldb) continue
+Enter the number of flights : Enter Flight no of Flight 1 : Enter destination : Enter the number of seats avsilable : Enter Flight no of Flight 2 : Enter destination : Enter the number of seats avsilable : Enter Flight no of Flight 3 : Enter destination : Enter the number of seats avsilable : Enter the Destination : Flight Found 
+Flight No: 23
+No of available seats : 234 Process 41948 resuming
+Process 41948 exited with status = 0 (0x00000000)
+(lldb) quit
