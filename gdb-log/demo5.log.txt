@@ -1,0 +1,153 @@
+(lldb) target create "demo5"
+Current executable set to '/Users/sandeepunni/acp2026/level1/demo5' (arm64).
+(lldb) command source -s 0 'debug_commands.lldb'
+Executing commands in '/Users/sandeepunni/acp2026/level1/debug_commands.lldb'.
+(lldb) breakpoint set --file demo5.c --line 12
+Breakpoint 1: where = demo5`main + 220 at demo5.c:12:16, address = 0x000000010000053c
+(lldb) breakpoint set --file demo5.c --line 14
+Breakpoint 2: where = demo5`main + 244 at demo5.c:14:16, address = 0x0000000100000554
+(lldb) breakpoint set --file demo5.c --line 19
+Breakpoint 3: where = demo5`main + 316 at demo5.c:19:16, address = 0x000000010000059c
+(lldb) breakpoint set --file demo5.c --line 21
+Breakpoint 4: where = demo5`main + 340 at demo5.c:21:5, address = 0x00000001000005b4
+(lldb) settings set target.input-path /Users/sandeepunni/acp2026/level1/input.txt
+(lldb) run
+Enter the number of elements : Enter array 1 
+Process 45746 launched: '/Users/sandeepunni/acp2026/level1/demo5' (arm64)
+Process 45746 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = breakpoint 1.1
+    frame #0: 0x000000010000053c demo5`main at demo5.c:12:16
+   9   	    scanf("%d", &n);
+   10  	    int a[n], b[n];
+   11  	    printf("Enter array 1 \n");
+-> 12  	    read_array(n, a);
+    	               ^
+   13  	    printf("Enter array 2 \n");
+   14  	    read_array(n, b);
+   15  	    printf("Array 1 : \n");
+Target 0: (demo5) stopped.
+(lldb) next
+Process 45746 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x0000000100000544 demo5`main at demo5.c:13:5
+   10  	    int a[n], b[n];
+   11  	    printf("Enter array 1 \n");
+   12  	    read_array(n, a);
+-> 13  	    printf("Enter array 2 \n");
+    	    ^
+   14  	    read_array(n, b);
+   15  	    printf("Array 1 : \n");
+   16  	    print_array(n, a);
+Target 0: (demo5) stopped.
+(lldb) print a[0]
+(int) 1
+(lldb) print a[1]
+(int) 2
+(lldb) print a[2]
+(int) 3
+(lldb) next
+Enter array 2 
+Process 45746 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = breakpoint 2.1
+    frame #0: 0x0000000100000554 demo5`main at demo5.c:14:16
+   11  	    printf("Enter array 1 \n");
+   12  	    read_array(n, a);
+   13  	    printf("Enter array 2 \n");
+-> 14  	    read_array(n, b);
+    	               ^
+   15  	    printf("Array 1 : \n");
+   16  	    print_array(n, a);
+   17  	    printf("Array 2 : \n");
+Target 0: (demo5) stopped.
+(lldb) next
+Process 45746 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x000000010000055c demo5`main at demo5.c:15:5
+   12  	    read_array(n, a);
+   13  	    printf("Enter array 2 \n");
+   14  	    read_array(n, b);
+-> 15  	    printf("Array 1 : \n");
+    	    ^
+   16  	    print_array(n, a);
+   17  	    printf("Array 2 : \n");
+   18  	    print_array(n, b);
+Target 0: (demo5) stopped.
+(lldb) print b[0]
+(int) 4
+(lldb) print b[1]
+(int) 5
+(lldb) print b[2]
+(int) 6
+(lldb) continue
+Array 1 : 
+1
+2
+3
+Array 2 : 
+4
+5
+6
+Process 45746 resuming
+Process 45746 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = breakpoint 3.1
+    frame #0: 0x000000010000059c demo5`main at demo5.c:19:16
+   16  	    print_array(n, a);
+   17  	    printf("Array 2 : \n");
+   18  	    print_array(n, b);
+-> 19  	    swap_array(n, a, b);
+    	               ^
+   20  	    printf("After swapping \n");
+   21  	    printf("Array 1 : \n");
+   22  	    print_array(n, a);
+Target 0: (demo5) stopped.
+(lldb) next
+Process 45746 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = step over
+    frame #0: 0x00000001000005a4 demo5`main at demo5.c:20:5
+   17  	    printf("Array 2 : \n");
+   18  	    print_array(n, b);
+   19  	    swap_array(n, a, b);
+-> 20  	    printf("After swapping \n");
+    	    ^
+   21  	    printf("Array 1 : \n");
+   22  	    print_array(n, a);
+   23  	    printf("Array 2 : \n");
+Target 0: (demo5) stopped.
+(lldb) print a[0]
+(int) 4
+(lldb) print a[1]
+(int) 5
+(lldb) print a[2]
+(int) 6
+(lldb) print b[0]
+(int) 1
+(lldb) print b[1]
+(int) 2
+(lldb) print b[2]
+(int) 3
+(lldb) next
+After swapping 
+Process 45746 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = breakpoint 4.1
+    frame #0: 0x00000001000005b4 demo5`main at demo5.c:21:5
+   18  	    print_array(n, b);
+   19  	    swap_array(n, a, b);
+   20  	    printf("After swapping \n");
+-> 21  	    printf("Array 1 : \n");
+    	    ^
+   22  	    print_array(n, a);
+   23  	    printf("Array 2 : \n");
+   24  	    print_array(n, b);
+Target 0: (demo5) stopped.
+(lldb) continue
+Array 1 : 
+4
+5
+6
+Array 2 : 
+1
+2
+3
+Process 45746 resuming
+Process 45746 exited with status = 0 (0x00000000)
+(lldb) quit
